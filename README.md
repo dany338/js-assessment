@@ -1,5 +1,7 @@
 # PROS UI Software Engineer Pre-Interview Questions
 
+Daniel Gallo Test & Javascript
+
 The repo includes a set of tests that assess your JavaScript skills, based
 on Rebecca Murphey's js-assessment framework, and a project to demonstrate practical React skills.
 
@@ -46,7 +48,7 @@ whether it worked.
     1. A multiline text input that will accept a list of names, one per line.
     2. A dropdown that allows the user to select one of several languages.
 2. Generate name tags for each name in the text input with a greeting in the language corresponding to the language chosen in the dropdown.
-3. Make the source available as a cloneable repo, for example, on Github, and provide the link below. Be sure to include instructions on how to run the application in the README. 
+3. Make the source available as a cloneable repo, for example, on Github, and provide the link below. Be sure to include instructions on how to run the application in the README.
 
 ## Completed project link
 Find my project source code [here]() (update this to link to your completed project).
