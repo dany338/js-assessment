@@ -3,18 +3,19 @@ describe('async behavior', () => {
     let flag = false;
     let finished = 0;
     const total = 2;
-
     function finish(_done) {
       finished += 1;
       if (finished === total) { _done(); }
     }
 
+    // eslint-disable-next-line no-undef
     asyncAnswers.async(true).then((result) => {
       flag = result;
       expect(flag).to.eql(true);
       finish(done);
     });
 
+    // eslint-disable-next-line no-undef
     asyncAnswers.async('success').then((result) => {
       flag = result;
       expect(flag).to.eql('success');
@@ -27,6 +28,7 @@ describe('async behavior', () => {
   it('you should be able to retrieve data from the server and return a sorted array of names', (done) => {
     const url = '/data/testdata.json';
 
+    // eslint-disable-next-line no-undef
     asyncAnswers.manipulateRemoteData(url).then((result) => {
       expect(result).to.have.length(5);
       expect(result.join(' ')).to.eql('Adam Alex Matt Paul Rebecca');

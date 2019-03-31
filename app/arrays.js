@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 arraysAnswers = {
   /**
    * Find the 0 based index of item in arr.
@@ -18,9 +20,11 @@ arraysAnswers = {
    * @returns {Number} The numerical sum of all items in arr.
    */
   sum: function sum(arr) {
-    arr.reduce((count, currentValue) => {
+    // eslint-disable-next-line arrow-body-style
+    const value = arr.reduce((count, currentValue) => {
       return count + currentValue;
     }, 0);
+    return value;
   },
 
   /**
@@ -31,7 +35,25 @@ arraysAnswers = {
    * @returns {Number[]} A new array containing all numbers from arr except item.
    */
   remove: function remove(arr, item) {
-    return arr.filter((number, index) => index != item)
+    return arr.filter(number => number !== item);
+  },
+
+  /**
+   * Create a new array with the same items as arr, excluding item
+   *
+   * @param {Number[]} arr - An array of numbers
+   * @param {Number} item - A number to be excluded from the new array
+   * @returns {Number[]} A new array containing all numbers from arr except item.
+   */
+  removeWithoutCopy: function removeWithoutCopy(arr, item) {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0, len = arr.length; i < len; i++) {
+      if (arr[i] === item) {
+        arr.splice(i, 1);
+        i -= 1;
+      }
+    }
+    return arr;
   },
 
   /**
@@ -42,7 +64,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with item appended.
    */
   append: function append(arr, item) {
-    return arr.push(item);
+    arr.push(item);
+    return arr;
   },
 
   /**
@@ -52,7 +75,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the last element removed..
    */
   truncate: function truncate(arr) {
-    return arr.pop();
+    arr.pop();
+    return arr;
   },
 
   /**
@@ -97,7 +121,7 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the number item inserted at position index.
    */
   insert: function insert(arr, item, index) {
-    return [...arr.slice(0, index), item, ...arr.slice(index+1)];
+    return [...arr.slice(0, index), item, ...arr.slice(index)];
   },
 
   /**
@@ -108,9 +132,17 @@ arraysAnswers = {
    * @returns {Number} The count of the number of times the number item appeared in arr.
    */
   count: function count(arr, item) {
-    arr.reduce((count, currentValue) => {
-      return (currentValue === item) ? count++ : 0;
+    // eslint-disable-next-line
+    const occurs = arr.reduce((cant, currentValue) => {
+      // eslint-disable-next-line no-return-assign no-param-reassign
+      if (currentValue === item) {
+        // eslint-disable-next-line no-plusplus
+        cant++;
+      }
+      return cant;
     }, 0);
+
+    return occurs;
   },
 
   /**
@@ -120,8 +152,24 @@ arraysAnswers = {
    * @returns {Number[]} An array of numbers that appear in arr more than once.
    */
   duplicates: function duplicates(arr) {
-    arr = arr.sort((a, b) => { return a - b; });
-    return arr.filter((value, index) => arr.indexOf(value) !== index);
+    const object = {};
+    const result = [];
+    arr = arr.sort((a, b) => a - b);
+    arr.forEach((i) => {
+      if (!object[i]) {
+        object[i] = 0;
+      }
+      object[i] += 1;
+    });
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const prop in object) {
+      if (object[prop] >= 2) {
+        // eslint-disable-next-line radix
+        result.push(parseInt(prop));
+      }
+    }
+    return result;
   },
 
   /**
@@ -131,9 +179,8 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers that contains the elements of arr squared.
    */
   square: function square(arr) {
-    arr.reduce((previousValue) => {
-      return previousValue * previousValue;
-    });
+    // eslint-disable-next-line arrow-body-style
+    return arr.map(num => num * num);
   },
 
   /**
@@ -144,10 +191,14 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers which represent the indices of target in arr.
    */
   findAllOccurrences: function findAllOccurrences(arr, target) {
-    arr.reduce((previousValue) => {
-      if (previousValue === target) {
-        return arr.indexOf(previousValue);
+    const arrNew = [];
+    // eslint-disable-next-line consistent-return
+    // eslint-disable-next-line array-callback-return
+    arr.forEach((num, index) => {
+      if (num === target) {
+        arrNew.push(index);
       }
     });
+    return arrNew;
   },
 };

@@ -29,7 +29,6 @@ describe('arrays', () => {
     a.push(2);
 
     const result = arraysAnswers.removeWithoutCopy(a, 2);
-
     expect(result).to.have.length(3);
     expect(result.join(' ')).to.eql('1 3 4');
 

@@ -2,8 +2,10 @@
 
 Daniel Gallo Test & Javascript
 npm install
+npm audit fix --force
 npm run start
 [http://localhost:4444](http://localhost:4444)
+[http://127.0.0.1:4444](http://127.0.0.1:4444)
 
 The repo includes a set of tests that assess your JavaScript skills, based
 on Rebecca Murphey's js-assessment framework, and a project to demonstrate practical React skills.

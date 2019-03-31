@@ -10,11 +10,10 @@ functionsAnswers = {
    * @returns Whatever fn would return
    */
   argsAsArray: function argsAsArray(fn, arr) {
-    const newFn = (arr) => {
-      return fn.call(arr.join(', ')); // fn(arr.join(', '));
-    };
-
-    return newFn;
+    const greeting = arr[0];
+    const name = arr[1];
+    const punctuation = arr[2];
+    return fn(greeting, name, punctuation);
   },
 
   /**
@@ -31,10 +30,10 @@ functionsAnswers = {
    * that begins with str + ', ' + that 1 argument.
    */
   functionFunction: function functionFunction(str) {
-    const newFn = (str) => {
-      return str + ', ' + arguments[i];
+    // eslint-disable-next-line arrow-body-style
+    const newFn = (str1) => {
+      return `${str}, ${str1}`;
     };
-
     return newFn;
   },
 };

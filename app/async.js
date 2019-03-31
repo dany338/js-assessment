@@ -7,8 +7,17 @@ asyncAnswers = {
    * @returns {then: function} A promise like object containing a then property.
    */
   async: function async(value) {
-    const item = await value;
-    return item;
+    // eslint-disable-next-line arrow-body-style
+    const funPromise = (value1) => {
+      return new Promise((resolve) => {
+        resolve(value1);
+      });
+    };
+    const funLogic = async (value1) => {
+      const result = funPromise(value1);
+      return result;
+    };
+    return funLogic(value);
   },
 
   /**
@@ -22,22 +31,33 @@ asyncAnswers = {
    * @returns {then: function} A promise like object containing a then property.
    */
   manipulateRemoteData: function manipulateRemoteData(url) {
-    const response = await fetch(url);
-    const peoples  = await response.json();
-    const names    = peoples.map(({ name }) => name);
-    names          = names.reverse();
-    names.map((name, index) => {
-      if(index === 2) {
-        const lastElem       = name[names.length-1];
-        const middleElem     = name[index];
-        const nextElem       = name[index+1];
-        name[index]          = lastElem;
-        name[index+1]        = middleElem;
-        name[names.length-1] = nextElem;
+    // eslint-disable-next-line arrow-body-style
+    const funPromiseNames = (dirUrl) => {
+      return new Promise((resolve) => {
+        // eslint-disable-next-line no-undef
+        setTimeout(() => {
+          resolve(fetch(dirUrl));
+        }, 1000);
+      });
+    };
+    // eslint-disable-next-line arrow-body-style
+    const funLogicUrl = async (dirUrl) => {
+      const response = await funPromiseNames(dirUrl);
+      let names = await response.json();
+      names = names.people.map(({ name }) => name);
+      names = names.reverse();
+      for (let index = 0; index < names.length; index++) {
+        if (index === 2) {
+          const lastElem = names[names.length - 1];
+          const middleElem = names[index];
+          const nextElem = names[index + 1];
+          names[index] = lastElem;
+          names[index + 1] = middleElem;
+          names[names.length - 1] = nextElem;
+        }
       }
-      return name;
-    });
-
-    return names;
+      return names;
+    };
+    return funLogicUrl(url);
   },
 };

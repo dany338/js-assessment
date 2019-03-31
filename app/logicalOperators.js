@@ -9,17 +9,16 @@ logicalOperatorsAnswers = {
    * @returns {bool} True if either a, b, or both are true, false otherwise.
    */
   or: function or(a, b) {
-    if(!isNaN(a)) { // or (num === '') || (typeof num === 'number')
+    if ((typeof a === 'number') && (typeof b === 'number')) {
       return false;
     }
 
-    if( a || b ) {
+    if ((!a && b) || (a && !b)) {
       return true;
-    } else if( !a && !b ) {
+    } else if (!a && !b) {
       return false;
-    } else  {
-      return true;
     }
+    return true;
   },
 
   /**
@@ -32,14 +31,13 @@ logicalOperatorsAnswers = {
    * @returns {bool} True if either a and b are both true, false otherwise.
    */
   and: function and(a, b) {
-    if(!isNaN(a)) { // or (num === '') || (typeof num === 'number')
+    if ((typeof a === 'number') && (typeof b === 'number')) {
       return true;
     }
 
-    if( a && b ) {
+    if (a && b) {
       return true;
-    } else  {
-      return false;
     }
-  }
+    return false;
+  },
 };

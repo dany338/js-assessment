@@ -16,31 +16,37 @@ recursionAnswers = {
    *
    * @returns {Number[]} The files under the directory dirName, including subdiretories.
    */
-  listFiles: function listFiles(data, dirName = null) {
-    const arrNumbers = [];
-    const arrNumbersSub = [];
-    dirName = (dirName !== null) ? dirName : data.dirName;
+  listFiles: function listFiles(data, dirName = '', arrFiles = []) {
 
-    if( sub.dirName == dirName ) {
-      for(let i = 0 ; i < data.files.length; i++) {
-        arrNumbers[i] = data.files.indexOf(data.files[i]);
+    if (dirName !== '' && arrFiles.length === 0) {
+      // eslint-disable-next-line no-param-reassign
+      data.subDirs = data.subDirs.filter(subdir => subdir.dirName === dirName);
+    } else if (dirName === '') {
+      let count = arrFiles.length;
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < data.files.length; i++) {
+        // eslint-disable-next-line no-param-reassign
+        arrFiles[count] = data.files[i];
+        // eslint-disable-next-line no-plusplus
+        count++;
       }
     }
-    let count = arrNumbers.length;
-    data.subDirs.forEach((sub) => {
-      if( sub.dirName == dirName ) {
-        for(let i = 0 ; i < sub.files.length; i++) {
-          arrNumbers[count] = sub.files.indexOf(sub.files[i]);
+
+    if ((data.subDirs !== undefined) && (data.subDirs.length !== 0)) {
+      // eslint-disable-next-line arrow-body-style
+      data.subDirs.forEach((subdir) => {
+        let count = arrFiles.length;
+        // eslint-disable-next-line no-plusplus
+        for (let i = 0; i < subdir.files.length; i++) {
+          // eslint-disable-next-line no-param-reassign
+          arrFiles[count] = subdir.files[i];
+          // eslint-disable-next-line no-plusplus
           count++;
         }
-
-        if(sub.subDirs.length != 0 && sub.subDirs !== undefined) {
-          arrNumbersSub = listFiles(sub.subDirs, sub.dirName);
-        }
-      }
-    });
-
-    return [...arrNumbers, ...arrNumbersSub];
+        return listFiles(subdir, subdir.dirName, arrFiles);
+      });
+    }
+    return arrFiles;
   },
 
   /**

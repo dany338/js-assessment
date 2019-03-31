@@ -12,13 +12,14 @@ stringsAnswers = {
   reduceString: function reduceString(str, amount) {
     let newStr = '';
     let cadTemp = '';
+    // eslint-disable-next-line no-plusplus
     for (let index = 0; index < str.length; index++) {
       const chartCad = str.charAt(index);
 
-      if(cadTemp != chartCad) {
+      if (cadTemp !== chartCad) {
         cadTemp = chartCad;
-        let newStrTemp = chartCad.repeat(amount);
-        if(str.includes(newStrTemp, index)) {
+        const newStrTemp = chartCad.repeat(amount);
+        if (str.includes(newStrTemp, index)) {
           newStr += newStrTemp;
         } else {
           newStr += chartCad;
@@ -38,9 +39,9 @@ stringsAnswers = {
    * @returns {String} The original string of text str reversed.
    */
   reverseString: function reverseString(str) {
-    let splitString = str.split("");
-    let reverseArray = splitString.reverse();
-    let joinArray = reverseArray.join("");
+    const splitString = str.split('');
+    const reverseArray = splitString.reverse();
+    const joinArray = reverseArray.join('');
     return joinArray;
   },
 };
